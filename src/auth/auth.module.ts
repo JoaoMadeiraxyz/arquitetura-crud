@@ -7,6 +7,8 @@ import { env } from 'process';
 import { AuthController } from './auth.controller';
 import { UserModule } from 'src/user.module';
 import { PrismaService } from 'src/prisma.service';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './jwt-auth-guard';
 
 @Module({
   imports: [
@@ -17,7 +19,13 @@ import { PrismaService } from 'src/prisma.service';
       signOptions: { expiresIn: '60m' },
     }),
   ],
-  providers: [AuthService, UserService, JwtStrategy, PrismaService],
+  providers: [
+    AuthService,
+    UserService,
+    JwtStrategy,
+    PrismaService,
+    { provide: APP_GUARD, useClass: AuthGuard },
+  ],
   controllers: [AuthController],
   exports: [AuthService],
 })

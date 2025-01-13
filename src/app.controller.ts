@@ -10,6 +10,7 @@ import {
 import { UserService } from './user.service';
 import { PostService } from './post.service';
 import { User as UserModel, Post as PostModel } from '@prisma/client';
+import { Public } from './auth/public.decorator';
 
 @Controller()
 export class AppController {
@@ -77,6 +78,7 @@ export class AppController {
     });
   }
 
+  @Public()
   @Post('user')
   async signupUser(
     @Body() userData: { name: string; email: string; password: string },
