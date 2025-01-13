@@ -7,8 +7,8 @@ import {
   Put,
   Delete,
 } from '@nestjs/common';
-import { UserService } from './user.service';
-import { PostService } from './post.service';
+import { UserService } from './user/user.service';
+import { PostService } from './post/post.service';
 import { User as UserModel, Post as PostModel } from '@prisma/client';
 import { Public } from './auth/public.decorator';
 
